@@ -178,3 +178,57 @@ def LeaveApplication(application: LeaveApplication, Authorization: Optional[str]
             "status": 500,
             "message": "Some Error Occurred."
         })
+        
+@app.get("/api/applications/{username}")
+def getUserPosts(username: str, Authorization: Optional[str] = Header(None)):
+    
+    if validateToken(Authorization) is False:
+        return {
+            "status": 401,
+            "message": "Invalid Token"
+        }
+    try:
+        postdb = deta.Base("LeaveApplication")
+        allPosts = postdb.fetch({"username": username}).items
+        return allPosts
+    except:
+        return({
+            "status": 500,
+            "message": "Some Error Occurred."
+        })
+
+@app.get("/api/applications")
+def getUserPosts(Authorization: Optional[str] = Header(None)):
+    
+    if validateToken(Authorization) is False:
+        return {
+            "status": 401,
+            "message": "Invalid Token"
+        }
+    try:
+        postdb = deta.Base("LeaveApplication")
+        allPosts = postdb.fetch().items
+        return allPosts
+    except:
+        return({
+            "status": 500,
+            "message": "Some Error Occurred."
+        })
+        
+@app.get("/api/user/{username}")
+def getUserPosts(username: str, Authorization: Optional[str] = Header(None)):
+    
+    if validateToken(Authorization) is False:
+        return {
+            "status": 401,
+            "message": "Invalid Token"
+        }
+    try:
+        postdb = deta.Base("User")
+        allPosts = postdb.fetch({"username": username}).items[0]
+        return allPosts
+    except:
+        return({
+            "status": 500,
+            "message": "Some Error Occurred."
+        })
