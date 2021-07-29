@@ -1,0 +1,6 @@
+fastapi
+deta
+pydantic
+jwt
+python-multipart
+PyJWT

@@ -1,0 +1,1 @@
+{"id":"0d4617bc-dd60-4c9c-a28b-a39f399d4081","space":6203,"runtime":"python3.7","name":"leave-application","path":"x8m70b","project":"c02ff9ee","account":"144798365827","region":"ap-southeast-1","deps":["fastapi","deta","pydantic","jwt","python-multipart","PyJWT"],"envs":null,"public":true,"log_level":"debug","cron":""}
