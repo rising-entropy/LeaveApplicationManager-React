@@ -7,7 +7,6 @@ const loginReducer = (state=initialState, action) => {
     {
         let theState = state
         theState['login']['username'] = action.username
-        console.log(state)
         return theState
     }
     if(action.type === 'loginPassword')
