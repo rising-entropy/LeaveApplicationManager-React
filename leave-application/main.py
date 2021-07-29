@@ -165,7 +165,16 @@ def LeaveApplication(application: LeaveApplication, Authorization: Optional[str]
     
     createApplication = {
         "username": username,
-        "leaveType": leaveType
+        "leaveType": leaveType,
+        "leaveFrom": leaveFrom,
+        "leaveTo": leaveTo,
+        "documents": documents
     }
     
-    
+    try:
+        return applicationdb.insert(createApplication)
+    except:
+        return({
+            "status": 500,
+            "message": "Some Error Occurred."
+        })
