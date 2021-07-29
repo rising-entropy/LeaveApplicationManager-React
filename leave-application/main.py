@@ -235,3 +235,47 @@ def getUserPosts(username: str, Authorization: Optional[str] = Header(None)):
             "status": 500,
             "message": "Some Error Occurred."
         })
+        
+# https://leave-application-react.deta.dev/
+
+@app.post("/api/uploadimage")
+def uploadImage(file: UploadFile = File(...), Authorization: Optional[str] = Header(None)):
+    
+    # if validateToken(Authorization) is False:
+    #     return {
+    #         "status": 401,
+    #         "message": "Invalid Token"
+    #     }
+    
+    subjectDrive = deta.Drive("Application_Image")
+    
+    fileName = str(uuid.uuid4())
+    fileExtension = file.filename.split(".")[1]
+    fileName += "."+fileExtension
+    
+    subjectDrive.put(name=fileName, data=file.file, content_type="image/"+fileExtension)
+    
+    return {
+        "status": 200,
+        "link": "https://leave-application-react.deta.dev/api/getimage/"+fileName
+    }
+    
+@app.get("/api/getimage/{imageLocation}")
+def getImage(imageLocation: str, Authorization: Optional[str] = Header(None)):
+    
+    # if validateToken(Authorization) is False:
+    #     return {
+    #         "status": 401,
+    #         "message": "Invalid Token"
+    #     }
+    
+    subjectDrive = deta.Drive("Application_Image")
+    try:
+        imageFile = subjectDrive.get(imageLocation)
+        imageExtension = imageLocation.split(".")[1]
+        return StreamingResponse(imageFile.iter_chunks(1024), media_type="image/"+imageExtension)
+    except:
+        return({
+            "status": 404,
+            "message": "Image Does not Exist"
+        })
