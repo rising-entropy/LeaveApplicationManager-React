@@ -66,7 +66,8 @@ def signup(user: User):
         "company": user.company,
         "position": user.position,
         "department": user.department,
-        "password": user.password
+        "password": user.password,
+        "isAdmin": False
     }
     
     try:
@@ -94,7 +95,8 @@ def signup(user: User):
         "email": user.email,
         "company": user.company,
         "position": user.position,
-        "department": user.department
+        "department": user.department,
+        "isAdmin": False
     })
     
 class Login(BaseModel):
@@ -139,6 +141,7 @@ def loginUser(login: Login):
         "lName": theUser['lName'],
         "username": theUser['username'],
         "email": theUser['email'],
+        "isAdmin": theUser['isAdmin']
     })
     
 class LeaveApplication(BaseModel):
