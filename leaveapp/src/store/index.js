@@ -1,23 +1,24 @@
-import {createStore} from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from '../sagas/index'
+import rootReducer from '../reducers/index'
 
-const initialState = {login: {username: "", password: ""}}
 
-const loginReducer = (state=initialState, action) => {
-    if(action.type === 'loginUsername')
-    {
-        let theState = state
-        theState['login']['username'] = action.username
-        return theState
-    }
-    if(action.type === 'loginPassword')
-    {
-        let theState = state
-        theState['login']['password'] = action.password
-        return theState
-    }
-    return state
+const configureStore = () => {
+    const sagaMiddleware = createSagaMiddleware();
+    const store = createStore(
+        rootReducer,
+        window.__REDUX_DEVTOOLS_EXTENSION__
+            ? compose(
+                  applyMiddleware(sagaMiddleware),
+                  window.__REDUX_DEVTOOLS_EXTENSION__(),
+              )
+            : applyMiddleware(sagaMiddleware),
+    );
+    sagaMiddleware.run(rootSaga);
+    return store;
 }
 
-const store = createStore(loginReducer)
+const store = configureStore();
 
 export default store;
