@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import axios from "axios";
+import {loginFormSubmit} from '../../actions/index'
 
 class LoginPage extends Component {
 
@@ -19,6 +20,8 @@ class LoginPage extends Component {
 
     loginSubmitHandler = async (e) => {
         e.preventDefault()
+        this.props.loginFormSubmit()
+        return
         const body = await {
             username: this.props.state.login.username,
             password: this.props.state.login.password
@@ -91,7 +94,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         loginUsername: (username) => dispatch({type: 'loginUsername', username: username}),
-        loginPassword: (password) => dispatch({type: 'loginPassword', password: password})
+        loginPassword: (password) => dispatch({type: 'loginPassword', password: password}),
+        loginFormSubmit: ()=>dispatch(loginFormSubmit())
     }
 }
 
