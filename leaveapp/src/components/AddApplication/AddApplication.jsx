@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import {ADD_APPLICATION} from '../../constants/index'
 
-export default class AddApplication extends Component {
+class AddApplication extends Component {
     render() {
         return (
             <div className="container container-fluid">
@@ -33,10 +35,28 @@ export default class AddApplication extends Component {
                 </div>
                 <br />
                 <label htmlFor="start">Upload Files:</label><br />
-                <input type="file" name="docs" multiple="multiple"   />
-                <button type="submit" className="btn btn-success">Submit Application</button>
+                <input type="file" name="docs" multiple="multiple" required={true}/>
+                <button type="submit" className="btn btn-primary">Submit Application</button>
                 </form>
             </div>
         )
     }
 }
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        leaveType: (leave) => dispatch({type: ADD_APPLICATION.LEAVE_TYPE, leave}),
+        startDate: (theDate) => dispatch({type: ADD_APPLICATION.START_DATE, theDate}),
+        endDate: (theDate) => dispatch({type: ADD_APPLICATION.END_DATE, theDate}),
+        filesUpload: (files) => dispatch({type: ADD_APPLICATION.FILES_UPLOAD, files})
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        state: state
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddApplication)
