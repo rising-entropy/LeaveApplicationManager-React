@@ -28,6 +28,21 @@ class AddApplication extends Component {
 
     addApplicationHandler = (e) => {
         e.preventDefault()
+        console.log(this.props.state)
+        //validation of the form
+        let startDate = new Date(this.props.state['application']['startDate'])
+        let endDate = new Date(this.props.state.application.endDate)
+        let todaysDate = new Date()
+        if(endDate < startDate)
+        {
+            alert("End Date can't be before the start")
+            return;
+        }
+        if(startDate < todaysDate)
+        {
+            alert("Cannot make an application for already passed date")
+            return;
+        }
         this.props.applicationFormSubmit();
     }
 

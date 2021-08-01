@@ -1,16 +1,14 @@
-import {initialState} from './index'
-
-const authReducer = (state=initialState, action) => {
+const authReducer = (state={isAuth: false}, action) => {
     if(action.type === 'authLogin')
     {
         let theState = state
-        theState['auth']['isAuth'] = true
+        theState['isAuth'] = true
         return theState
     }
     if(action.type === 'authLogout')
     {
         let theState = state
-        theState['auth']['isAuth'] = false
+        theState['isAuth'] = false
         return theState
     }
     return state

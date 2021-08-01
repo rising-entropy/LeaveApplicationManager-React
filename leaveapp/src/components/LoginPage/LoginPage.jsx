@@ -19,7 +19,6 @@ class LoginPage extends Component {
 
     loginSubmitHandler = async (e) => {
         e.preventDefault()
-        console.log("hey1")
         this.props.loginFormSubmit()
         return
     }
