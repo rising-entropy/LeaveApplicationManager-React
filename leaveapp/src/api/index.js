@@ -46,3 +46,7 @@ export const loginSubmit = async (body) => {
         //throw err
       });
 }
+
+export const applicationFormSubmit = (body) => {
+    console.log("Inside")
+}

@@ -1,12 +1,14 @@
-import loginReducer from '../reducers/loginReducer';
-import authReducer from '../reducers/authReducer'
+import loginReducer from './loginReducer';
+import authReducer from './authReducer'
+import addApplicationReducer from './addApplication'
 import { combineReducers } from 'redux';
 
-export const initialState = {auth: {isAuth: false}, login: {username: "", password: ""}}
+export const initialState = {auth: {isAuth: false}, login: {username: "", password: ""}, application: {leaveType: "", startDate: "", endDate: "", files: []}}
 
 const rootReducer = combineReducers({
     login: loginReducer,
-    auth: authReducer
+    auth: authReducer,
+    application: addApplicationReducer
 });
 
 export default rootReducer;
