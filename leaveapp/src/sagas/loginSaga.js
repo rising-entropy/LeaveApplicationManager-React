@@ -1,4 +1,4 @@
-import {takeEvery, select, call, put} from 'redux-saga/effects'
+import {takeEvery, select, call} from 'redux-saga/effects'
 import { LOGIN } from '../constants'
 import {loginSubmit} from '../api/index'
 

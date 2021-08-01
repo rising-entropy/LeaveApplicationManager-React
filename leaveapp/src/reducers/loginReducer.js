@@ -1,6 +1,6 @@
-const initialLoginState = {login: {username: "", password: ""}}
+import {initialState} from './index'
 
-const loginReducer = (state=initialLoginState, action) => {
+const loginReducer = (state=initialState, action) => {
     if(action.type === 'loginUsername')
     {
         let theState = state

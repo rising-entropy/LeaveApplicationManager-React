@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import axios from "axios";
 import {loginFormSubmit} from '../../actions/index'
 
 class LoginPage extends Component {
@@ -22,43 +21,6 @@ class LoginPage extends Component {
         e.preventDefault()
         this.props.loginFormSubmit()
         return
-        const body = await {
-            username: this.props.state.login.username,
-            password: this.props.state.login.password
-        }
-        axios.post(
-        'https://leave-application-react.deta.dev/api/login',
-        body,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        if (response.status === 200) {
-          const data = response.data;
-          console.log(data);
-          if (data.status === 404) {
-            alert(data.message);
-            window.location = "/login";
-            return 0;
-          }
-          if (data.status === 403) {
-            alert(data.message);
-            window.location = "/login";
-            return 0;
-          }
-          localStorage.setItem("username", data.username);
-          localStorage.setItem("token", data.token);
-          alert("Successfully Logged In")
-          window.location = "/feed";
-        }
-      })
-      .catch((err) => {
-        alert("Server Seems to be down. Please try later. We got this.");
-        window.location = '/login'
-      });
     }
 
 

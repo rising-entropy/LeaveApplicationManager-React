@@ -1,6 +1,11 @@
 import axios from "axios";
+import store from '../store/index'
 
 const URL = `https://leave-application-react.deta.dev/api/`;
+
+// const successfulLoginDispatch = (dispatch) => {
+//     dispatch({ type: "authLogin" })
+// }
 
 export const loginSubmit = async (body) => {
     await axios.post(
@@ -30,6 +35,7 @@ export const loginSubmit = async (body) => {
           }
           localStorage.setItem("username", data.username);
           localStorage.setItem("token", data.token);
+          store.dispatch({ type: "authLogin" });
           alert("Successfully Logged In")
           window.location = "/";
         }
