@@ -43,6 +43,8 @@ class AddApplication extends Component {
             alert("Cannot make an application for already passed date")
             return;
         }
+        //check if all files are images
+        //update file state by pushing just files (maybe extensions) to the saga
         this.props.applicationFormSubmit();
     }
 
@@ -78,7 +80,7 @@ class AddApplication extends Component {
                 </div>
                 <br />
                 <label htmlFor="start">Upload Files:</label><br />
-                <input type="file" name="docs" multiple="multiple" onChange={this.fileUploadHandler.bind(this)} required={true}/>
+                <input type="file" name="docs" multiple="multiple" onChange={this.fileUploadHandler.bind(this)} required={ this.props.state.application.leaveType==='Sick Leave' ? true : false}/>
                 <button type="submit" className="btn btn-primary">Submit Application</button>
                 </form>
             </div>
