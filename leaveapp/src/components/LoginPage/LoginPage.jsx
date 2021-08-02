@@ -40,6 +40,8 @@ class LoginPage extends Component {
                         <input type="password" name="kdtjdsjsfgsd" onChange={this.passwordHandler.bind(this)} autoComplete="off" required />
                         <br /><br /><br />
                         <button type="submit" className="btn-lg btn btn-success">Login</button>
+                        <br /><br />
+                        <h6>Don't have an Account? <a href="/signup">Register</a></h6>
                     </form>
                 </div>
             </div>
