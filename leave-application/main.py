@@ -250,7 +250,7 @@ def uploadImage(file: UploadFile = File(...), Authorization: Optional[str] = Hea
     subjectDrive = deta.Drive("Application_Image")
     
     fileName = str(uuid.uuid4())
-    fileExtension = file.filename.split(".")[1]
+    fileExtension = file.filename.split(".")[len(file.filename.split("."))-1]
     fileName += "."+fileExtension
     
     subjectDrive.put(name=fileName, data=file.file, content_type="image/"+fileExtension)

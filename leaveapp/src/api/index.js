@@ -48,7 +48,41 @@ export const loginSubmit = async (body) => {
 }
 
 //a function that uploads image and returns link
+const uploadImageForLink = async(file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const value = await fetch(
+          'https://leave-application-react.deta.dev/api/uploadimage',
+          {
+              method: 'POST',
+              body: formData,
+          }
+      )
+      .then((response) => response.json())
+      .then((result) => {
+          return result.link
+        })
+      .catch((error) => {
+      alert("Problem with Image Upload")
+      window.location = '/'
+      return 0;
+      });
+  return value
+}
 
 export const applicationFormSubmit = async (body) => {
-    console.log(body)
+    let documents = []
+    for(let i=0; i<body.files.length; i++)
+    {
+      const docLink = await uploadImageForLink(body.files[i])
+      documents.push(docLink)
+    }
+    let bodyToPost = {
+      username: body.username,
+      leaveType: body.leaveType,
+      leaveFrom: body.startDate,
+      leaveTo: body.endDate,
+      documents: documents
+    }
+    console.log(bodyToPost)
 }
