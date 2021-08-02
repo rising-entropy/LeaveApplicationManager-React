@@ -9,6 +9,9 @@ const URL = `https://leave-application-react.deta.dev/api/`;
 // }
 
 export const loginSubmit = async (body) => {
+
+  // console.log(body)
+
     await axios.post(
         URL+'login',
         body,
@@ -42,6 +45,7 @@ export const loginSubmit = async (body) => {
         }
       })
       .catch((err) => {
+        console.log(err)
         alert("Server Seems to be down. Please try later. We got this.");
         window.location = '/'
         //throw err

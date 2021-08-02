@@ -9,10 +9,13 @@ class App extends Component{
   constructor()
   {
     super()
-    if(localStorage.getItem('username').length > 0)
-    {
-      store.dispatch({ type: "authLogin" });
+    try{
+      if(localStorage.getItem('username').length > 0)
+      {
+        store.dispatch({ type: "authLogin" });
+      }
     }
+    catch{}
   }
 
   theAuth = false
@@ -26,7 +29,7 @@ class App extends Component{
     return(
       <Router>
         <Switch>
-          <Route exact path="/" component={localStorage.getItem('username').length > 0 ? ApplicationsPage : LoginPage}></Route>
+          <Route exact path="/" component={localStorage.getItem('username') && localStorage.getItem('username').length > 0 ? ApplicationsPage : LoginPage}></Route>
           <Route exact path="/applications" component={ApplicationsPage}></Route>
         </Switch>
       </Router>

@@ -33,11 +33,11 @@ class LoginPage extends Component {
                         <br />
                         <h2>Login Page</h2>
                         <br />
-                        <label htmlFor="username">Username:</label><br />
-                        <input type="text" name="username" onChange={this.usernameHandler.bind(this)} required />
+                        <label htmlFor="fhdufmktfdtjs">Username:</label><br />
+                        <input type="text" name="fhdufmktfdtjs" onChange={this.usernameHandler.bind(this)} autoComplete="off" required />
                         <br /><br />
-                        <label htmlFor="password">Password:</label><br />
-                        <input type="password" name="password" onChange={this.passwordHandler.bind(this)} required />
+                        <label htmlFor="kdtjdsjsfgsd">Password:</label><br />
+                        <input type="password" name="kdtjdsjsfgsd" onChange={this.passwordHandler.bind(this)} autoComplete="off" required />
                         <br /><br /><br />
                         <button type="submit" className="btn-lg btn btn-success">Login</button>
                     </form>

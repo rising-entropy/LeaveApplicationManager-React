@@ -7,7 +7,6 @@ export const getLoginBody = state => state['login'];
 function* loginSubmitSaga(){
     try {
         let body = yield select(getLoginBody)
-        body = body['login']
         const loginResponse = yield call(loginSubmit, body)
         yield loginResponse
         // const images = yield call(fetchImages, page);
