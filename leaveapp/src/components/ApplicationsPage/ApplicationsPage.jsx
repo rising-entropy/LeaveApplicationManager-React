@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AllApplications from '../AllApplications/AllAlpplications'
+import AllApplications from '../AllApplications/AllApplications'
 import AddApplication from '../AddApplication/AddApplication'
 
 export default class ApplicationsPage extends Component {

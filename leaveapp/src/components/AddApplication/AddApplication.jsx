@@ -103,7 +103,7 @@ class AddApplication extends Component {
                 <br />
                 <label htmlFor="start">Upload Files:</label><br />
                 <input type="file" name="docs" multiple="multiple" onChange={this.fileUploadHandler.bind(this)} />
-                <button type="submit" className="btn btn-primary">Submit Application</button>
+                <button type="submit" className="btn btn-primary" style={{margin: "5% auto"}}>Submit Application</button>
                 </form>
             </div>
         )

@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from '../store/index'
+import {GET_APPLICATIONS} from '../constants/index'
 
 const URL = `https://leave-application-react.deta.dev/api/`;
 
@@ -85,4 +86,85 @@ export const applicationFormSubmit = async (body) => {
       documents: documents
     }
     console.log(bodyToPost)
+    const theResp = await axios.post(
+      URL+'applications',
+      bodyToPost,
+      {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': localStorage.getItem('token')
+          }
+      }
+      ).then(
+      response => {
+          if(response.status === 200){
+              const data = response.data;
+              if(data.status === 401)
+              {
+                  alert("Your Session has expired. Kindly Login")
+                  localStorage.setItem('username', "")
+                  localStorage.setItem('token', "")
+                  window.location = "/"
+                  return 0;
+              }
+              if(data.status === 500)
+              {
+                  alert(data.message);
+                  window.location = '/'
+                  return 0;
+              }
+              alert("Leave Applied Successfully!")
+              window.location = "/"
+              return 0;
+              }
+      }
+      )
+      .catch(
+          err => {
+              alert("Some error occurred while creating application. Please try again.")
+              window.location = '/'
+              return 0;
+              }
+      );
+  console.log(theResp)
+}
+
+export const getApplications = async() => {
+  const theResp = await axios({
+      method: "GET",
+      url:
+        URL+'applications/'+localStorage.getItem('username'),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem('token'),
+      },
+    })
+    .then((response) => {
+      const data = response.data;
+      if(data.status === 401)
+      {
+        alert("Your Session has expired. Kindly Login")
+        localStorage.setItem('username', "")
+        localStorage.setItem('token', "")
+        window.location = "/"
+        return 0;
+      }
+      if(data.status === 500)
+      {
+        alert(data.message);
+        window.location = '/'
+        return 0;
+      }
+      console.log(data)
+      store.dispatch({ type: GET_APPLICATIONS.UPDATE_APPLICATIONS, applications: data });
+      return data
+      // setEvent(data);
+      // console.log(data)
+      // setScreenReady(true)
+    })
+    .catch((err) => {
+      alert("Cannot retrieve your applications. Please try again later.")
+      window.location = '/'
+      return 0;
+    });
 }
