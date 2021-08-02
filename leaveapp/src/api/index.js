@@ -158,9 +158,6 @@ export const getApplications = async() => {
       console.log(data)
       store.dispatch({ type: GET_APPLICATIONS.UPDATE_APPLICATIONS, applications: data });
       return data
-      // setEvent(data);
-      // console.log(data)
-      // setScreenReady(true)
     })
     .catch((err) => {
       alert("Cannot retrieve your applications. Please try again later.")
