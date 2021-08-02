@@ -16,7 +16,7 @@ class AllApplications extends Component {
                 <h2>Your Applications ({this.props.state.getApplications.applications.length}):</h2>
                 <div className="container container-fluid">
                     <div className="row">
-                        {this.props.state.getApplications.applications.map((application, index)=>(<Application application={application} key={index} />))}
+                        {this.props.state.getApplications.applications.map((application, index)=>(<Application style={{margin: "3%"}} application={application} key={index} />))}
                     </div>
                 </div>
             </div>

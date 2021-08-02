@@ -26,6 +26,14 @@ class AddApplication extends Component {
         this.props.filesUpload(e.target.files)
     }
 
+    logoutHandler = () => {
+        localStorage.setItem('username', '')
+        localStorage.setItem('token', '')
+        alert("Successfully Logged Out!")
+        window.location="/"
+        return
+    }
+
     addApplicationHandler = (e) => {
         e.preventDefault()
         console.log(this.props.state)
@@ -74,6 +82,7 @@ class AddApplication extends Component {
         return (
             <div className="container container-fluid">
                 <br />
+                <div className="text-right" style={{margin: "3% auto"}}><button onClick={this.logoutHandler.bind(this)} className="btn btn-danger text-right">Logout</button></div>
                 <h3>Leave Application Form</h3>
                 <br />
                 <form onSubmit={this.addApplicationHandler.bind(this)}>
