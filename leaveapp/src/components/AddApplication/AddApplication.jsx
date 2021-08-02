@@ -43,8 +43,30 @@ class AddApplication extends Component {
             alert("Cannot make an application for already passed date")
             return;
         }
+        
         //check if all files are images
-        //update file state by pushing just files (maybe extensions) to the saga
+        let files = this.props.state.application.files
+        if(this.props.state.application.leaveType==='Sick Leave' && files.length===0)
+        {
+            alert("Please upload documents for Sick Leave.")
+            return;
+        }
+        for(let i=0; i<files.length; i++)
+        {
+            if(files[i].type!=="image/png" && files[i].type!=="image/jpeg")
+            {
+                alert("Invalid File-Type of the uploaded document. Try Again.");
+                return;
+            }
+            let fileSize = files[i].size
+            fileSize = fileSize / 1048576;
+            if(fileSize > 2)
+            {
+                alert("Uploaded document should not be more than 2MB. Try Again.");
+                return;
+            }
+        }
+        //update file state by pushing just files (maybe extensions) to the saga (maybe not needed)
         this.props.applicationFormSubmit();
     }
 
@@ -80,7 +102,7 @@ class AddApplication extends Component {
                 </div>
                 <br />
                 <label htmlFor="start">Upload Files:</label><br />
-                <input type="file" name="docs" multiple="multiple" onChange={this.fileUploadHandler.bind(this)} required={ this.props.state.application.leaveType==='Sick Leave' ? true : false}/>
+                <input type="file" name="docs" multiple="multiple" onChange={this.fileUploadHandler.bind(this)} />
                 <button type="submit" className="btn btn-primary">Submit Application</button>
                 </form>
             </div>

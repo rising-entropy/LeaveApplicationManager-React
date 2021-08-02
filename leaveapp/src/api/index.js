@@ -47,6 +47,8 @@ export const loginSubmit = async (body) => {
       });
 }
 
-export const applicationFormSubmit = (body) => {
-    console.log("Inside")
+//a function that uploads image and returns link
+
+export const applicationFormSubmit = async (body) => {
+    console.log(body)
 }

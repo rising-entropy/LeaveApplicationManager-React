@@ -1,9 +1,14 @@
 import {takeEvery, select, call} from 'redux-saga/effects'
 import { ADD_APPLICATION } from '../constants'
-import {loginSubmit} from '../api/index'
+import {applicationFormSubmit} from '../api/index'
+
+export const getApplicationBody = state => state['application'];
 
 function* applicationSubmitSaga(){
-    console.log("Hello")
+    let body = yield select(getApplicationBody)
+    body.username = localStorage.getItem("username")
+    const applicationResponse = yield call(applicationFormSubmit, body)
+    yield applicationResponse
 }
 
 export default function* watchApplicationSaga() {
