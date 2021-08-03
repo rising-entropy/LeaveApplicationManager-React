@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import {SignUpFormSubmit} from '../../actions/index'
+import {SIGNUP} from '../../constants/index'
 
 class SignUpPage extends Component {
 
@@ -50,17 +52,17 @@ class SignUpPage extends Component {
         {
             alert("Password and Confirm Password do not match.")
         }
-        const body = {
-            fName: this.props.state.signUp.fName,
-            lName: this.props.state.signUp.lName,
-            username: this.props.state.signUp.username,
-            email: this.props.state.signUp.email,
-            password: this.props.state.signUp.password,
-            company: this.props.state.signUp.company,
-            position: this.props.state.signUp.position,
-            department: this.props.state.signUp.department
-        }
-        console.log(body)
+        // const body = {
+        //     fName: this.props.state.signUp.fName,
+        //     lName: this.props.state.signUp.lName,
+        //     username: this.props.state.signUp.username,
+        //     email: this.props.state.signUp.email,
+        //     password: this.props.state.signUp.password,
+        //     company: this.props.state.signUp.company,
+        //     position: this.props.state.signUp.position,
+        //     department: this.props.state.signUp.department
+        // }
+        this.props.SignUpFormSubmit()
     }
 
     render() {
@@ -135,6 +137,7 @@ const mapDispatchToProps = (dispatch) => {
         signUpCompany: (company) => dispatch({type: 'signUpCompany', company}),
         signUpPosition: (position) => dispatch({type: 'signUpPosition', position}),
         signUpDepartment: (department) => dispatch({type: 'signUpDepartment', department}),
+        SignUpFormSubmit: ()=>dispatch({type: SIGNUP.SIGNUP})
     }
 }
 

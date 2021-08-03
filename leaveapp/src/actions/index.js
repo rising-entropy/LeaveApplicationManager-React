@@ -17,7 +17,6 @@ export const updateUserApplications = (applications) => ({
     applications
 })
 
-export const signupUser = () => (body) => ({
-    type: SIGNUP.SIGNUP,
-    body
+export const SignUpFormSubmit = () => () => ({
+    type: SIGNUP.SIGNUP
 })

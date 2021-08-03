@@ -169,3 +169,7 @@ export const getApplications = async() => {
       return 0;
     });
 }
+
+export const signUpSubmit = async(body) => {
+  console.log("All Set")
+}
