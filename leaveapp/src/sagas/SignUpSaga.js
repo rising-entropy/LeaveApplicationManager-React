@@ -1,4 +1,4 @@
-import {takeEvery, select, call, take} from 'redux-saga/effects'
+import {select, call, take} from 'redux-saga/effects'
 import { SIGNUP } from '../constants'
 import {signUpSubmit} from '../api/index'
 
@@ -7,7 +7,7 @@ export const getSignUpBody = state => state['signUp'];
 function* signUpSubmitSaga(){
     try {
         let body = yield select(getSignUpBody)
-        console.log(body)
+        delete body.cPassword
         const signUpResponse = yield call(signUpSubmit, body)
         yield signUpResponse
     } catch (error) {

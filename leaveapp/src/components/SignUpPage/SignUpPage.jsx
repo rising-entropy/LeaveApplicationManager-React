@@ -50,7 +50,9 @@ class SignUpPage extends Component {
         e.preventDefault()
         if(this.props.state.signUp.password !== this.props.state.signUp.cPassword)
         {
+            console.log([this.props.state.signUp.password, this.props.state.signUp.cPassword])
             alert("Password and Confirm Password do not match.")
+            return;
         }
         // const body = {
         //     fName: this.props.state.signUp.fName,

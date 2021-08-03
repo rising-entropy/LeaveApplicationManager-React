@@ -171,5 +171,39 @@ export const getApplications = async() => {
 }
 
 export const signUpSubmit = async(body) => {
-  console.log("All Set")
+  axios.post(
+    URL+"signup",
+    body,
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+  ).then(
+    response => {
+        if(response.status === 200){
+          const data = response.data;
+          if(data.status === 201)
+          {
+            // localStorage.setItem('username', data.username);
+            // localStorage.setItem('token', data.token);
+            alert("Successfully Signed Up. Kindly Login.")
+            window.location = '/'
+          }
+          if(data.status === 409)
+          {
+            alert(data.message);
+            window.location = '/signup'
+          }
+        }
+    }
+  )
+  .catch(
+    err => {
+      alert("Some error occurred")
+      console.log(err);
+      window.location = '/signup'
+      return 0;
+    }
+  );
 }
