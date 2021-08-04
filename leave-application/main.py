@@ -200,8 +200,8 @@ def getUserPosts(username: str, Authorization: Optional[str] = Header(None)):
             "message": "Some Error Occurred."
         })
 
-@app.get("/api/applications")
-def getUserPosts(Authorization: Optional[str] = Header(None)):
+@app.get("/api/admin/applications/{username}")
+def getAllPosts(username: str, Authorization: Optional[str] = Header(None)):
     
     if validateToken(Authorization) is False:
         return {
@@ -209,14 +209,28 @@ def getUserPosts(Authorization: Optional[str] = Header(None)):
             "message": "Invalid Token"
         }
     try:
-        postdb = deta.Base("LeaveApplication")
-        allPosts = postdb.fetch().items
-        return allPosts
+        postdb = deta.Base("User")
+        thatUser = postdb.fetch({"username": username}).items[0]
+        if thatUser['isAdmin'] == True:
+            try:
+                postdb = deta.Base("LeaveApplication")
+                allPosts = postdb.fetch().items
+                return allPosts
+            except:
+                return({
+                    "status": 500,
+                    "message": "Some Error Occurred."
+                })
+        else:
+            return({
+                    "status": 403,
+                    "message": "You don't have permission to access."
+                })
     except:
         return({
-            "status": 500,
-            "message": "Some Error Occurred."
-        })
+                    "status": 404,
+                    "message": "User does not exist."
+                })
         
 @app.get("/api/user/{username}")
 def getUserPosts(username: str, Authorization: Optional[str] = Header(None)):
