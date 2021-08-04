@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from '../store/index'
-import {GET_APPLICATIONS} from '../constants/index'
+import {GET_APPLICATIONS, ADMIN} from '../constants/index'
 
 const URL = `https://leave-application-react.deta.dev/api/`;
 
@@ -206,4 +206,53 @@ export const signUpSubmit = async(body) => {
       return 0;
     }
   );
+}
+
+export const getAdminApplications = async() => {
+  const theResp = await axios({
+      method: "GET",
+      url:
+        URL+'admin/applications/'+localStorage.getItem('username'),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem('token'),
+      },
+    })
+    .then((response) => {
+      const data = response.data;
+      if(data.status === 401)
+      {
+        alert("Your Session has expired. Kindly Login")
+        localStorage.setItem('username', "")
+        localStorage.setItem('token', "")
+        window.location = "/"
+        return 0;
+      }
+      if(data.status === 500)
+      {
+        alert(data.message);
+        window.location = '/'
+        return 0;
+      }
+      if(data.status === 403)
+      {
+        alert(data.message);
+        window.location = '/'
+        return 0;
+      }
+      if(data.status === 404)
+      {
+        alert(data.message);
+        window.location = '/'
+        return 0;
+      }
+      console.log(data)
+      store.dispatch({ type: ADMIN.UPDATE_APPLICATIONS, applications: data });
+      return data
+    })
+    .catch((err) => {
+      alert("Cannot retrieve your applications. Please try again later.")
+      window.location = '/'
+      return 0;
+    });
 }

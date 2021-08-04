@@ -1,4 +1,4 @@
-import {LOGIN, ADD_APPLICATION, GET_APPLICATIONS, SIGNUP} from '../constants/index'
+import {LOGIN, ADD_APPLICATION, GET_APPLICATIONS, SIGNUP, ADMIN} from '../constants/index'
 
 export const loginFormSubmit = () => ({
     type: LOGIN.LOGIN,
@@ -17,6 +17,15 @@ export const updateUserApplications = (applications) => ({
     applications
 })
 
-export const SignUpFormSubmit = () => () => ({
+export const SignUpFormSubmit = () => ({
     type: SIGNUP.SIGNUP
+})
+
+export const adminGetApplications = () => ({
+    type: ADMIN.APPLICATIONS,
+})
+
+export const adminUpdateApplications = (applications) => ({
+    type: ADMIN.UPDATE_APPLICATIONS,
+    applications
 })

@@ -4,6 +4,7 @@ import LoginPage from './components/LoginPage/LoginPage'
 import ApplicationsPage from "./components/ApplicationsPage/ApplicationsPage";
 import store from './store/index'
 import SignUpPage from "./components/SignUpPage/SignUpPage";
+import AdminPage from './components/AdminPage/AdminPage'
 
 class App extends Component{
 
@@ -32,6 +33,7 @@ class App extends Component{
         <Switch>
           <Route exact path="/" component={localStorage.getItem('username') && localStorage.getItem('username').length > 0 ? ApplicationsPage : LoginPage}></Route>
           <Route exact path="/applications" component={ApplicationsPage}></Route>
+          <Route exact path="/admin" component={AdminPage}></Route>
           {localStorage.getItem('username') && localStorage.getItem('username').length > 0 ? null : <Route exact path="/signup" component={SignUpPage}></Route>}
         </Switch>
       </Router>

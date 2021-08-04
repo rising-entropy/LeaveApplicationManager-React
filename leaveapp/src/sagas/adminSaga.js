@@ -1,13 +1,12 @@
 import {call, put, take} from 'redux-saga/effects'
-import { GET_APPLICATIONS } from '../constants'
-import {getApplications} from '../api/index'
-// import {updateUserApplications} from '../actions/index'
+import { ADMIN } from '../constants'
+import {getAdminApplications} from '../api/index'
 
 // export const getApplicationBody = state => state['application'];
 
 function* applicationSubmitSaga(){
     try {
-        const applications = yield call(getApplications);
+        const applications = yield call(getAdminApplications);
         //yield put(updateUserApplications(applications));
         //console.log(applications)
         yield applications
@@ -19,6 +18,6 @@ function* applicationSubmitSaga(){
 }
 
 export default function* watchApplicationSaga() {
-    yield take(GET_APPLICATIONS.APPLICATIONS)
+    yield take(ADMIN.APPLICATIONS)
     yield call(applicationSubmitSaga)
 }
