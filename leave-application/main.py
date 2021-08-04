@@ -200,6 +200,7 @@ def getUserPosts(username: str, Authorization: Optional[str] = Header(None)):
             "message": "Some Error Occurred."
         })
 
+#admin mode
 @app.get("/api/admin/applications/{username}")
 def getAllPosts(username: str, Authorization: Optional[str] = Header(None)):
     
